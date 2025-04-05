@@ -23,3 +23,10 @@ jobs:
           platforms: linux/arm/v8
           push: true
           tags: ghcr.io/mathisburger/devcontainers-symfony-postgres:latest
+      - name: Build typo3 postgres
+        uses: docker/build-push-action@v2
+        with:
+          context: ./typo3-postgres
+          platforms: linux/arm/v8
+          push: true
+          tags: ghcr.io/mathisburger/devcontainers-typo3-postgres:latest    
