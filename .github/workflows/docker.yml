@@ -1,6 +1,7 @@
 on:
-  release:
-
+  push:
+    tags:
+      - 'v*'  # Nur Tags, die mit "v" beginnen, z. B. v1.0.0
 jobs:
   build-docker:
     runs-on: ubuntu-latest
