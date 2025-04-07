@@ -1,8 +1,0 @@
-services:
-  typo3:
-    image: ghcr.io/mathisburger/devcontainers-typo3-postgres:latest
-    restart: unless-stopped
-    environment:
-      SERVER_NAME: localhost, php:80
-    volumes:
-      - ./:/var/www/html
