@@ -37,6 +37,9 @@ RUN set -ex \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) $PHP_EXTENSIONS \
     && a2enmod rewrite \
+    && a2enmod proxy \
+    && a2enmod proxy_http \
+    && a2enmod proxy_fcgi \
 	&& curl --silent --show-error https://getcomposer.org/installer | php -- \
 	   --force --install-dir=/usr/local/bin --filename=composer \
     && apt-get autoremove -y
