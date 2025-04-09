@@ -51,3 +51,4 @@ COPY vhost.conf /etc/apache2/sites-enabled/000-default.conf
 EXPOSE 80
 EXPOSE 9003
 
+CMD ["service", "apache2", "reload"]
