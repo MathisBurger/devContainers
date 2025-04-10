@@ -28,6 +28,13 @@ RUN set -ex \
        libzip-dev \
        nano \
        mariadb-client \
+    && wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz \
+    && tar xzf Python-2.7.18.tgz \
+    && cd Python-2.7.18 \
+    && ./configure --enable-optimizations \
+    && make -j"$(nproc)" \
+    && make altinstall \
+    && ln -s /usr/local/bin/python2.7 /usr/bin/python2  \ 
 	&& locale-gen de_DE.UTF-8 \
 	&& update-locale \
     && mkdir ~/.gnupg \
@@ -51,4 +58,4 @@ COPY vhost.conf /etc/apache2/sites-enabled/000-default.conf
 EXPOSE 80
 EXPOSE 9003
 
-CMD ["service", "apache2", "reload"]
+CMD ["apache2-foreground"]

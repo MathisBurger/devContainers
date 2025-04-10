@@ -6,6 +6,9 @@ services:
       SERVER_NAME: localhost, php:80
     volumes:
       - ./:/var/www/html
+    ports:
+      - "8001:80"
+      - "9003:9003"  
   db:
     image: mariadb:10.6
     container_name: typo3-db
