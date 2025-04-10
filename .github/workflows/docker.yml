@@ -27,6 +27,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./typo3-mariadb
-          platforms: linux/arm/v8
+          platforms: linux/amd64
           push: true
           tags: ghcr.io/mathisburger/devcontainers-typo3-mariadb:latest    

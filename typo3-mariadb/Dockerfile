@@ -1,9 +1,8 @@
-FROM php:8.2-apache
+FROM --platform=linux/amd64 php:8.2-apache
 
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER 1
-ENV NODE_VERSION 10.15.3
 ENV SASS_BINARY_PATH /usr/share/node-sass/binding.node
 ENV PHP_EXTENSIONS "iconv curl pgsql mysqli pdo pdo_pgsql pdo_mysql intl zip soap gd bcmath exif"
 
@@ -50,6 +49,13 @@ RUN set -ex \
 	&& curl --silent --show-error https://getcomposer.org/installer | php -- \
 	   --force --install-dir=/usr/local/bin --filename=composer \
     && apt-get autoremove -y
+
+RUN apt-get remove -y nodejs
+RUN curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o /usr/local/bin/n \
+&& chmod +x /usr/local/bin/n \
+&& n 10.15.3 \
+&& ln -sf /usr/local/n/versions/node/10.15.3/bin/node /usr/bin/node \
+&& ln -sf /usr/local/n/versions/node/10.15.3/bin/npm /usr/bin/npm
 
 WORKDIR /var/www/html
 
