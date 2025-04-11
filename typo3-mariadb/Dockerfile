@@ -4,7 +4,7 @@ ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV SASS_BINARY_PATH /usr/share/node-sass/binding.node
-ENV PHP_EXTENSIONS "iconv curl pgsql mysqli pdo pdo_pgsql pdo_mysql intl zip soap gd bcmath exif xdebug"
+ENV PHP_EXTENSIONS "iconv curl pgsql mysqli pdo pdo_pgsql pdo_mysql intl zip soap gd bcmath exif"
 
 RUN set -ex \
     && apt-get update && apt-get install --no-install-recommends -y \
@@ -49,6 +49,10 @@ RUN set -ex \
 	&& curl --silent --show-error https://getcomposer.org/installer | php -- \
 	   --force --install-dir=/usr/local/bin --filename=composer \
     && apt-get autoremove -y
+
+RUN pecl install xdebug \
+&& docker-php-ext-enable xdebug
+
 
 RUN apt-get remove -y nodejs
 RUN curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o /usr/local/bin/n \
